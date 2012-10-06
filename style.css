@@ -1,0 +1,31 @@
+body{
+   background: #f8f8cc;
+}
+
+div#container{
+    width:930px;
+    margin:0 auto;
+}
+
+div#title{
+    text-align:center;
+}
+
+img
+{
+    margin:20px 20px 0px 0px;
+    float:right;
+    width:400px;
+}
+
+div.project_desc{
+    text-align:right;
+    float:left;
+    width:490px;
+    height:200px;
+    margin:20px 0px;
+}
+
+h3{
+    margin:0px;
+}
