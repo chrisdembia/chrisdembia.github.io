@@ -1,10 +1,11 @@
 ---
 layout: post
-title: Python wrapping using SWIG and NumPy
+title: Python wrapping, with NumPy support, using SWIG
 ---
 
-I recently learned how to use SWIG to wrap C++ code with Python, along with
-NumPy. Here are some of the existing resources for learning how to do this:
+I recently learned how to use SWIG to wrap C++ code with Python, and to do so
+with NumPy support. Here are some of the extant resources for learning how to
+do this:
 
 1. SWIG [documentation][swig]
 2. NumPy SWIG interface file [documentation][numpyswig]
@@ -14,7 +15,7 @@ I'm going to make this example as concrete and specific as possible.
 
 ---
 
-# The given C++ library
+## The given C++ library
 
 We assume that we already have a C++ library that we want to wrap. That is, we
 have the library's header files and shared libraries. We'll imagine that we're
@@ -26,46 +27,69 @@ Matrix class used to specify [rotation matrices][rotmat].
 
 ##### Vector.h
 {% highlight c++ %}
+namespace graphics {
 template<class T> class Vector
 {
+public:
+    /// @param initialValues: array of initial values, with specified length.
+    Vector(int length, T* initialValues);
+    T operator[](int index) { return _values[index]; }
+private:
+    std::vector _values;
 };
+}
+{% endhighlight %}
+
+##### Matrix.h
+{% highlight c++ %}
+namespace graphics {
+template<class T> class Matrix
+{
+};
+}
 {% endhighlight %}
 
 ##### Shape.h
 {% highlight c++ %}
+namespace graphics {
 class Shape
 {
 public:
+    virtual void setPosition(Vector3f pos);
     virtual void setOrientation();
-    virtual void setPosition();
     virtual void draw() = 0;
 };
+}
 {% endhighlight %}
 
 Sphere.h
 {% highlight c++ %}
+namespace graphics {
 class Sphere : public Shape
 {
 public:
     void draw();
 };
+}
 {% endhighlight %}
 
-
-Shape.cpp
+##### Shape.cpp
 {% highlight c++ %}
-Shape::setPosition(
+namespace graphics {
+Shape::setPosition(Vec3f pos) {
+    _position = pos;
+}
+}
 {% endhighlight %}
 
-hello
 
-# Setting up a SWIG target in CMake
+## Setting up a SWIG target in CMake
 
-# Creating an interface file
+## Creating an interface file
 
-# Using typemaps
+## Using typemaps
 
-# Using NumPy arrays for input and output
+## Using NumPy arrays for input and output
 
 {% highlight python %}
 s = "Python syntax highlighting"
