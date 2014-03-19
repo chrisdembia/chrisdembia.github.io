@@ -4,8 +4,6 @@ title: Python wrapping using SWIG and NumPy
 published: true
 ---
 
-TESTING 
-
 I recently learned how to use SWIG to wrap C++ code with Python, along with
 NumPy. Here are some of the existing resources for learning how to do this:
 
